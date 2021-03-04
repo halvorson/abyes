@@ -142,17 +142,17 @@ class AbExp:
 
         rvs = b_rvs - a_rvs
         bins = np.linspace(np.min(rvs) - 0.2 * abs(np.min(rvs)), np.max(rvs) + 0.2 * abs(np.max(rvs)), self.resolution)
-        lift = np.histogram(rvs, bins=bins)
+        lift = np.histogram(rvs, bins=bins, normed=True)
 
         bins = np.linspace(0, 1, self.resolution)
         sigma_a_rvs = np.sqrt(a_rvs * (1 - a_rvs))
         sigma_b_rvs = np.sqrt(b_rvs * (1 - b_rvs))
-        psigma_a = np.histogram(sigma_a_rvs, bins=bins)
-        psigma_b = np.histogram(sigma_b_rvs, bins=bins)
+        psigma_a = np.histogram(sigma_a_rvs, bins=bins, normed=True)
+        psigma_b = np.histogram(sigma_b_rvs, bins=bins, normed=True)
 
         rvs = (b_rvs - a_rvs) / np.sqrt(0.5 * (sigma_a_rvs**2 + sigma_b_rvs**2))
         bins = np.linspace(np.min(rvs) - 0.2 * abs(np.min(rvs)), np.max(rvs) + 0.2 * abs(np.max(rvs)), self.resolution)
-        pes = np.histogram(rvs, bins=bins)
+        pes = np.histogram(rvs, bins=bins, normed=True)
 
         posterior = {'muA': pa, 'muB': pb, 'psigma_a': psigma_a, 'psigma_b': psigma_b,
                      'lift': lift, 'es': pes, 'prior': self.prior()}
