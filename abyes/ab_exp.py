@@ -263,7 +263,7 @@ class AbExp:
             plt.xlabel('$\mu_A,\  \mu_B$')
             plt.xlim([0, 1])
             plt.title('Conversion Rate')
-            plt.locator_params(nbins=6)
+            plt.locator_params(nticks=6)
             plt.gca().set_ylim(bottom=0)
             plt.legend()
 
@@ -275,7 +275,7 @@ class AbExp:
             plt.xlabel(r'$\mu_B-\mu_A$')
             plt.title('Expected Loss')
             plt.gca().set_ylim(bottom=0)
-            plt.gca().locator_params(axis='x', nbins=6)
+            plt.gca().locator_params(axis='x', numticks=6)
             plt.legend()
 
         if ela <= self.toc and elb <= self.toc:
