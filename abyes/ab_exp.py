@@ -142,17 +142,17 @@ class AbExp:
 
         rvs = b_rvs - a_rvs
         bins = np.linspace(np.min(rvs) - 0.2 * abs(np.min(rvs)), np.max(rvs) + 0.2 * abs(np.max(rvs)), self.resolution)
-        lift = np.histogram(rvs, bins=bins, normed=True)
+        lift = np.histogram(rvs, bins=bins, density=True)
 
         bins = np.linspace(0, 1, self.resolution)
         sigma_a_rvs = np.sqrt(a_rvs * (1 - a_rvs))
         sigma_b_rvs = np.sqrt(b_rvs * (1 - b_rvs))
-        psigma_a = np.histogram(sigma_a_rvs, bins=bins, normed=True)
-        psigma_b = np.histogram(sigma_b_rvs, bins=bins, normed=True)
+        psigma_a = np.histogram(sigma_a_rvs, bins=bins, density=True)
+        psigma_b = np.histogram(sigma_b_rvs, bins=bins, density=True)
 
         rvs = (b_rvs - a_rvs) / np.sqrt(0.5 * (sigma_a_rvs**2 + sigma_b_rvs**2))
         bins = np.linspace(np.min(rvs) - 0.2 * abs(np.min(rvs)), np.max(rvs) + 0.2 * abs(np.max(rvs)), self.resolution)
-        pes = np.histogram(rvs, bins=bins, normed=True)
+        pes = np.histogram(rvs, bins=bins, density=True)
 
         posterior = {'muA': pa, 'muB': pb, 'psigma_a': psigma_a, 'psigma_b': psigma_b,
                      'lift': lift, 'es': pes, 'prior': self.prior()}
@@ -263,7 +263,7 @@ class AbExp:
             plt.xlabel('$\mu_A,\  \mu_B$')
             plt.xlim([0, 1])
             plt.title('Conversion Rate')
-            plt.locator_params(nticks=6)
+            plt.locator_params(nbins=6)
             plt.gca().set_ylim(bottom=0)
             plt.legend()
 
@@ -275,7 +275,7 @@ class AbExp:
             plt.xlabel(r'$\mu_B-\mu_A$')
             plt.title('Expected Loss')
             plt.gca().set_ylim(bottom=0)
-            plt.gca().locator_params(axis='x', numticks=6)
+            plt.gca().locator_params(axis='x', nbins=6)
             plt.legend()
 
         if ela <= self.toc and elb <= self.toc:
