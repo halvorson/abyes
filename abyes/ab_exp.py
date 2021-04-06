@@ -261,9 +261,15 @@ class AbExp:
             b = posterior['muB'][1]
             plt.plot(0.5*(b[0:-1]+b[1:]), posterior['muB'][0], lw=2, label=r'$f(\mu_B)$')
             plt.xlabel('$\mu_A,\  \mu_B$')
+            """
+            Zooms in the graph for only distributions higher than a y "threshold of caring".
+            xmax requires scanning the reversed array.
+            """
             ytoc = 0.0001
             xmin = min(posterior['muA'][1][np.argmax(posterior['muA'][0] > ytoc)], posterior['muB'][1][np.argmax(posterior['muB'][0] > ytoc)])
             print(xmin)
+            xmax = max(posterior['muA'][1][len(posterior['muA'][0]) - np.argmax(posterior['muA'][0][::-1] > ytoc)], posterior['muB'][1][len(posterior['muB'][0]) - np.argmax(posterior['muB'][0][::-1] > ytoc)])
+            print(xmax)
             plt.xlim([0, 1])
             plt.title('Conversion Rate')
             plt.locator_params(nbins=6)
