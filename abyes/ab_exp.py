@@ -261,9 +261,8 @@ class AbExp:
             b = posterior['muB'][1]
             plt.plot(0.5*(b[0:-1]+b[1:]), posterior['muB'][0], lw=2, label=r'$f(\mu_B)$')
             plt.xlabel('$\mu_A,\  \mu_B$')
-            firstarg = np.argmax(posterior['muA'][0] > 0.0001)
-            print(firstarg)
-            xmin = b = posterior['muA'][1][firstarg]
+            ytoc = 0.0001
+            xmin = min(posterior['muA'][1][np.argmax(posterior['muA'][0] > ytoc)], posterior['muB'][1][np.argmax(posterior['muB'][0] > ytoc)])
             print(xmin)
             plt.xlim([0, 1])
             plt.title('Conversion Rate')
