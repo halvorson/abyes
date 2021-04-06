@@ -270,7 +270,7 @@ class AbExp:
             print(xmin)
             xmax = max(posterior['muA'][1][len(posterior['muA'][0]) - np.argmax(posterior['muA'][0][::-1] > ytoc)], posterior['muB'][1][len(posterior['muB'][0]) - np.argmax(posterior['muB'][0][::-1] > ytoc)])
             print(xmax)
-            plt.xlim([0, 1])
+            plt.xlim([xmin, xmax])
             plt.title('Conversion Rate')
             plt.locator_params(nbins=6)
             plt.gca().set_ylim(bottom=0)
